@@ -1,2 +1,2 @@
 # disfo
-a platform where you can discuss anything and everything :D 
+a platform where you can discuss about anything and everything :D 
