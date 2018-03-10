@@ -5,16 +5,21 @@
 {% block header %}
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/login.css') }}">
 {% endblock %}
-
+{% block content %}
 <div class="login">
-  <form>
+  <form action="/login" method="POST">
     <h3>Log In</h3>
-    <input type="text" placeholder="Email or Phone Number"><br><br>
-    <input type="password" placeholder="Password"><br><br>
+    <input type="text" name="name" placeholder="Email or Phone Number" value="{{ name }}"><br><br>
+    <input type="password" name="pwd" placeholder="Password"><br><br>
+    <input type="submit" name="submit" class="waves-effect waves-light btn-large"><br><br>
   </form>
-  <a class="waves-effect waves-light btn-large">Login</a><br><br>
+  {% if error is defined %}
+    <span class="error">{{ error }}</span>
+  {% endif %}
+  
   <h5>Don't have an Account? <a href="signup" class="waves-effect waves-light btn">SignUp</a></h5>
 </div>
+{% endblock %}
 {% block scripts %}
-  <script type="text/javascript" src="../static/js/index.js"></script>
+  <script type="text/javascript" src="{{ url_for('static',filename='js/index.js') }}"></script>
 {% endblock %}

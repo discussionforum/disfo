@@ -36,15 +36,19 @@
       </nav> -->
 
      <div class="signup">
-    <form>
+    <form action="/signup" method="POST">
       <h3>Create a New Account</h3>
-      <input type="text" placeholder="First Name"><br><br> 
-      <input type="text" placeholder="Last Name"><br><br>
-      <input type="text" placeholder="Email or Phone Number"><br><br>
-      <input type="password" placeholder="New Password"><br><br>
+      <input type="text" placeholder="First Name" name="firstname" value="{{ firstname }}"><br><br> 
+      <input type="text" placeholder="Last Name" name="lastname" value="{{ lastname }}"><br><br>
+      <input type="text" placeholder="Email or Phone Number" name="emailorphone" value="{{ email_phone }}"><br><br>
+      <input type="password" placeholder="New Password" name="pwd"><br><br>
+      <input class="waves-effect waves-light btn-large" type="submit" value= "Create Account"><br><br>
     </form>
-    <a class="waves-effect waves-light btn-large">Create Account</a><br><br>
-    <h5>Already a User? <a href="login.html" class="waves-effect waves-light btn">Login</a></h5>
+    {% if error is defined %}
+    <span class="error">{{ error }}</span>
+    {% endif %}
+    
+    <h5>Already a User? <a href="login" class="waves-effect waves-light btn">Login</a></h5>
     </div>
 
        <!--  <footer class="page-footer">
