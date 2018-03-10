@@ -24,6 +24,7 @@
         <a href="#" data-activates="mobile-navigation" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
           {% if username is defined%}
+          <li><a hred="{{ username }}">Hey {{ username }}</a></li>
             <li><a href="logout">Logout</a></li>
             {% else %}
             <li><a href="signup">SignUp</a></li>
@@ -33,6 +34,7 @@
         <ul class="side-nav" id="mobile-navigation">
           
           {% if username is defined%}
+            <li><a hred="{{ username }}">Hey {{ username }}</a></li>
             <li><a href="logout">Logout</a></li>
             {% else %}
             <li><a href="signup">SignUp</a></li>

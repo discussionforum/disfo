@@ -41,7 +41,7 @@ def login():
 		if row==None:
 			return render_template("login.html",name=name, error="Email or Phone does not exist")
 		if row[2]==name:
-			if argon2.verify(passwd,row[2]):
+			if argon2.verify(passwd,row[3]):
 				session['username'] = row[0]
 				return redirect(url_for("index"))
 			else:
@@ -50,7 +50,6 @@ def login():
 			return render_template("login.html",name=name, error="Email or Phone does not exist")
 		conn.close()
 		
-
 @app.route('/signup',methods=['GET', 'POST'])
 def signup():
 	if request.method=="GET":
@@ -65,16 +64,14 @@ def signup():
 		cur.execute("""select * from users where emorph = '%s'"""%(emorph))
 		row  = cur.fetchone()
 		if row is not None:
-			return render_template("signup.html",error="Mail Id or phone number already registered",
-				firstname = fname, lastname = lname,emorph= emorph)
+			return render_template("signup.html",error="Mail Id or phone number already registered",firstname = fname,
+				lastname=lname,emorph=emorph)
 		else:
 			encpwd = argon2.using(rounds=10000).hash(passwd)
 			cur.execute("""insert into users values('%s','%s','%s','%s')"""%(fname,lname,emorph,encpwd))
 			session['username'] = fname
-			return redirect(url_for("index"))
 		conn.commit()
-		conn.close()
-
+		return redirect(url_for("index"))
 @app.route('/logout')
 def logout():
 	session.pop('username',None)
